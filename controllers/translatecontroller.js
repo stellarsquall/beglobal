@@ -2,7 +2,7 @@ var BeGlobal = require('node-beglobal');
 
 //initialize the BeGlobal API
 var beglobal = new BeGlobal.BeglobalAPI({
-  api_token: 'fEBjo7TypzImt5dOxxWw7Q%3D%3D'
+  api_token: 'cJgoWyKRD2ctrn0QULJqFg%3D%3D'
 });
 
 // callback that gets all languages from BeGlobal.
@@ -24,13 +24,33 @@ var getLanguages = function(callback) {
 
 var getUniqueLanguages = function(languages) {
 	var results = [];
+	var resultsObject = [];
 	for (var i = 0; i<languages.length; i++) {
 		if (results.indexOf(languages[i].from.name) === -1) {
-			results.push(languages[i].from.name)
+			results.push(languages[i].from.name);
+			resultsObject.push(languages[i].from)
 		}
 	}
-	return results
+	return resultsObject
 };
+
+var translateFunction = function(callback, data) {
+	beglobal.translations.translate(
+	 	data,
+	  	function(err, results) {
+	    	if (err) {
+	      	return console.log(err);
+	    	}
+	    	callback(results)
+		}
+	)
+};
+
+// JQuery
+
+// $(document).ready(function() {
+// 	var wordInput = $('.word-input').text();
+// });	
 
 module.exports = {
 	index: function(req, res) {
@@ -45,20 +65,9 @@ module.exports = {
 	},
 
 	translate: function(req, res) {
-		beglobal.translations.translate(
-		  {text: 'hello', from: 'eng', to: 'fra'},
-		  function(err, results) {
-		    if (err) {
-		      return console.log(err);
-		    }
-		    console.log(results);
-			res.render('translate.jade', {
-				title: 'BeGlobal',
-				inputlanguage: results.to,
-				outputlanguage: results.from,
-				translation: results.translation
-			})
-	 	 }
-		);
+		var translateCallback = function(results) {
+			res.send(results);
+		};
+			translateFunction(translateCallback, req.body);
 	}
 }

@@ -7,27 +7,23 @@ block content
         h1 #{title}
   .row
     .col-sm-3.col-sm-offset-1
-      input.form-control(type='text', placeholder='Input Word')
+      input.word-input.form-control(type='text', placeholder='Input Word')
     .col-sm-1
       div From:
     .col-sm-2
       .dropdown-form
-        select.form-control
+        select.form-control.translate-from
           for language in languages
-            option: a(href='#')= language
+            option(value=language.code)= language.name
     .col-sm-1
       div To:
     .col-sm-2
       .dropdown-form
-        select.form-control
+        select.form-control.translate-to
           for language in languages
-            option: a(href='#')= language
-  .row
-  .row
-    .col-sm-2.col-offset-8
-      button.btn-md Submit Button
+            option(value=language.code)= language.name
+  .row.btn-submit
+    .col-sm-4.col-sm-offset-8.pull-right
+      button.btn-lg Submit Button
 
 block scripts
-
-  script.
-    $('.dropdown-form').dropdown()
