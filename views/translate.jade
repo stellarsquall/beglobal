@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .row
+    .col-sm-10.col-sm-offset-1
+      .jumbotron.homewelcome
+        h1 #{title}
+  .row
+    .col-sm-3.col-sm-offset-1
+      input.form-control(type='text', placeholder='Input Word')
+    .col-sm-1
+      div From:
+    .col-sm-2
+      .dropdown-form
+        select.form-control
+          for language in languages
+            option: a(href='#')= language
+    .col-sm-1
+      div To:
+    .col-sm-2
+      .dropdown-form
+        select.form-control
+          for language in languages
+            option: a(href='#')= language
+  .row
+  .row
+    .col-sm-2.col-offset-8
+      button.btn-md Submit Button
+
+block scripts
+
+  script.
+    $('.dropdown-form').dropdown()
