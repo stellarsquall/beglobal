@@ -55,7 +55,6 @@ var translateFunction = function(callback, data) {
 module.exports = {
 	index: function(req, res) {
 		var langCallback = function(results) {
-			console.log(results);
 	    	res.render('translate.jade', {
 	    		title: 'BeGlobal',
 	    		languages: getUniqueLanguages(results)

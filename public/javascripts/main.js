@@ -14,12 +14,11 @@ $(document).ready(function() {
 				from: translateFrom,
 				to: translateTo
 			},
-			success: function(beglobaldata) {
-				console.log('BeGlobal-Data Client: ', beglobaldata);
-				for (var i = 0; i < beglobaldata.length; i++) {
-					$('.btn-submit').append('<li>' + beglobaldata[i].name + '</li>');
-				};
+			success: function(results) {
+				console.log('BeGlobal-Data Client: ', results);
+					$('.btn-submit').append('<li>' + results.translation + '</li>');
+				}
 			}
-		});
-	})
-})
+		)}
+	)}
+)
